@@ -4,16 +4,16 @@ class Solution {
         int high = nums.length - 1;
         while (low <= high) {
             int middle = (low + high) / 2;
-            int midVal = nums[middle];
-            if (midVal == target) {
+            int mid = nums[middle];
+            if (mid == target) {
                 return middle;
-            } else if (target > midVal) {
+            } else if (target > mid) {
                 low = middle + 1;
             } else {
                 high = middle - 1;
             }
         }
-        return -1; //-1表示未找到
+        return -1;
     }
 
 }
