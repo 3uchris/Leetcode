@@ -19,6 +19,5 @@ class Solution {
         }
         
         return bulls + "A" + cows + "B";
-        
     }
 }
