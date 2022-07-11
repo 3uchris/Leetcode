@@ -1,24 +1,21 @@
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
-        
-        List<List<String>> result = new ArrayList<>(); // initlize the reuslt list of list
-        
-        HashMap<String, List<String>> map = new HashMap<>(); // initialize the hashmap
-        for(String curr : strs){
-            char[] characters = curr.toCharArray();
-            Arrays.sort(characters);
-            
-            String sorted_string = new String(characters);
-            if(!map.containsKey(sorted_string)){
-                map.put(sorted_string, new ArrayList<>());
-            }
-            
-            map.get(sorted_string).add(curr);
-        }
-        
-        
-        result.addAll(map.values());
-        return result;
-        
+        return new ArrayList<>(Arrays.stream(strs)
+            .collect(Collectors.groupingBy(str -> {
+                int[] counter = new int[26];
+                for (int i = 0; i < str.length(); i++) {
+                    counter[str.charAt(i) - 'a']++;
+                }
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < 26; i++) {
+                    // 这里的 if 是可省略的，但是加上 if 以后，生成的 sb 更短，后续 groupingBy 会更快。
+                    if (counter[i] != 0) {
+                        sb.append((char) ('a' + i));
+                        sb.append(counter[i]);
+                    }
+                }
+                return sb.toString();
+            })).values());
     }
 }
+
