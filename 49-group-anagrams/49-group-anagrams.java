@@ -1,21 +1,20 @@
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
-        return new ArrayList<>(Arrays.stream(strs)
-            .collect(Collectors.groupingBy(str -> {
-                int[] counter = new int[26];
-                for (int i = 0; i < str.length(); i++) {
-                    counter[str.charAt(i) - 'a']++;
-                }
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < 26; i++) {
-                    // 这里的 if 是可省略的，但是加上 if 以后，生成的 sb 更短，后续 groupingBy 会更快。
-                    if (counter[i] != 0) {
-                        sb.append((char) ('a' + i));
-                        sb.append(counter[i]);
-                    }
-                }
-                return sb.toString();
-            })).values());
+        HashMap<String, ArrayList<String>> map = new HashMap<>();
+        
+        for(String s:strs){
+            char[] characters = s.toCharArray(); // converts a given string into a sequence of characters 
+            Arrays.sort(characters); //sort the order of the characters
+            
+            String key = new String(characters); // convert the sorted characters into string and use it as a key
+            
+            if(!map.containsKey(key)) map.put(key, new ArrayList<>());
+            //if the map does not contain the key, we add the key to the hashmap and generate the value of arraylist 
+            map.get(key).add(s);
+            //get the value using key, and add the unrevised string as value
+        }
+        
+        return new ArrayList(map.values()); //ignore the key, and put the values into a new array
     }
 }
 
