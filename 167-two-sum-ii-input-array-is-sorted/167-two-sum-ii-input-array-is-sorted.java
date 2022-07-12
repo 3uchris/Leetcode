@@ -10,11 +10,8 @@ class Solution {
                 return new int[] {left+1, right+1};
             }
             
-            if(left_value + right_value < target){
-                left++;
-            }else{
-                right--;
-            }
+            if(left_value + right_value < target) left++;
+            else right--;
         }
         return new int[] {};
     }
