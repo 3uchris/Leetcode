@@ -1,7 +1,7 @@
 class Solution {
     public int characterReplacement(String s, int k) {
         int length = s.length();
-        int[] freq = new int[26];
+        int[] freq = new int[26]; // 
         
         int max = 0;
         int left = 0;
