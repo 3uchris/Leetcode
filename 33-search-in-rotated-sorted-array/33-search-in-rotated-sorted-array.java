@@ -1,42 +1,27 @@
 class Solution {
     public int search(int[] nums, int target) {
-        int left = 0;
-        int right = nums.length - 1;
-        
-        if(nums == null|| nums.length == 0) return -1;
-        
-        while(left < right){
-            int mid = left + (right - left)/2;
-            if(nums[mid] > nums[right]){
-                left = mid + 1;
-            }else{
-                right = mid;   
-            }
+    int minIdx = findMinIdx(nums);
+    if (target == nums[minIdx]) return minIdx;
+    int m = nums.length;
+    int start = (target <= nums[m - 1]) ? minIdx : 0;
+    int end = (target > nums[m - 1]) ? minIdx : m - 1;
+    
+    while (start <= end) {
+        int mid = start + (end - start) / 2;
+        if (nums[mid] == target) return mid;
+        else if (target > nums[mid]) start = mid + 1;
+        else end = mid - 1;
+    }
+    return -1;
+    }
+
+    public int findMinIdx(int[] nums) {
+        int start = 0, end = nums.length - 1;
+        while (start < end) {
+            int mid = start + (end -  start) / 2;
+            if (nums[mid] > nums[end]) start = mid + 1;
+            else end = mid;
         }
-        
-        int start = left;
-        left = 0;
-        right = nums.length - 1;
-        
-        if(target >= nums[start] && target <= nums[right]){
-            left = start;
-        }
-        else{
-            right = start;
-        }
-        
-        while(left <= right){
-            int mid = left + (right - left)/2;
-            if(nums[mid] == target){
-                return mid;
-            }
-            else if(nums[mid] < target){
-                left = mid + 1;
-            }
-            else{
-                right = mid - 1;
-            }
-        }
-        return -1;
+        return start;
     }
 }
