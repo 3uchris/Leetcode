@@ -9,15 +9,20 @@
  * }
  */
 class Solution {
-    public ListNode reverseList(ListNode head) {
-        ListNode prev = null;
-        ListNode curr = head;
-        while (curr != null) {
-            ListNode next = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = next;
-        }
-        return prev;
-    }
+	public ListNode reverseList(ListNode head) {
+		//申请节点，pre和 cur，pre指向null
+		ListNode pre = null;
+		ListNode cur = head;
+		ListNode tmp = null;
+		while(cur!=null) {
+			//记录当前节点的下一个节点
+			tmp = cur.next;
+			//然后将当前节点指向pre
+			cur.next = pre;
+			//pre和cur节点都前进一位
+			pre = cur;
+			cur = tmp;
+		}
+		return pre;
+	}
 }
