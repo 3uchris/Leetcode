@@ -13,7 +13,9 @@ class Solution {
         ListNode dummy = new ListNode(-1,head);
         ListNode slow = dummy;
         ListNode fast = head;
-        
+        //-1->1->2->3->4->5->null
+        // s        f
+        //then s and f go forward at the same time until fast == null
         for(int i = 0; i < n; i++){
             fast = fast.next;
         }
