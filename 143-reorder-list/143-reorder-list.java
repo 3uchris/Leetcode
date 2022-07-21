@@ -12,17 +12,16 @@ class Solution {
     public void reorderList(ListNode head) {
         if(head == null || head.next == null || head.next.next == null) return;
         
-        //step 1: make pointer "slow" points at the midpoint or left-mid(even num) of the Linkedlist
         ListNode slow = head;
         ListNode fast = head.next;
-        while(fast != null && fast.next != null){
+        while(fast != null && fast.next !=null){
             slow = slow.next;
             fast = fast.next.next;
         }
         
-        //step 2: split two linkedlists at the midpoint, and reverse the right part
         ListNode prev = null;
         ListNode temp = slow.next;
+        
         slow.next = null;
         slow = temp;
         
@@ -33,16 +32,15 @@ class Solution {
             slow = temp;
         }
         
+        ListNode left = head;
+        ListNode right = prev;
         
-        ListNode head_left = head;
-        ListNode head_right = prev;
-        
-        while(head_left != null && head_right != null){
-            temp = head_left.next;
-            head_left.next = head_right;
-            head_right = head_right.next;
-            head_left.next.next = temp;
-            head_left = temp;
+        while(left != null && right != null){
+            temp = left.next;
+            left.next = right;
+            right = right.next;
+            left.next.next = temp;
+            left = temp;
         }
 
     }
