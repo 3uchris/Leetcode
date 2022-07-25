@@ -10,8 +10,10 @@
  */
 class Solution {
     public void reorderList(ListNode head) {
+        //special case: more than 2 nodes is needed;
         if(head == null || head.next == null || head.next.next == null) return;
         
+        //use fast slow pointer to find the midpoint(left middle) of the Linklist
         ListNode slow = head;
         ListNode fast = head.next;
         while(fast != null && fast.next !=null){
@@ -19,10 +21,11 @@ class Solution {
             fast = fast.next.next;
         }
         
+        //split the linked list into two parts, and to reverse the right part 
         ListNode prev = null;
         ListNode temp = slow.next;
         
-        slow.next = null;
+        slow.next = null; //points the left part to null
         slow = temp;
         
         while(slow != null){
@@ -32,6 +35,8 @@ class Solution {
             slow = temp;
         }
         
+        
+        //merge two linkedlist
         ListNode left = head;
         ListNode right = prev;
         
