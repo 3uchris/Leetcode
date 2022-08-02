@@ -21,14 +21,15 @@ class Solution {
     }
     
     public int longestPath(TreeNode root){
+        
         if(root == null) return 0;
         
-        int leftheight = longestPath(root.left);
-        int rightheight = longestPath(root.right);
+        int left = longestPath(root.left);
+        int right = longestPath(root.right);
         
-        longest = Math.max(longest, leftheight+rightheight);
+        longest = Math.max(longest, left+right);
         
-        return Math.max(leftheight, rightheight)+1;
+        return Math.max(left, right)+1;
     }
     
     
