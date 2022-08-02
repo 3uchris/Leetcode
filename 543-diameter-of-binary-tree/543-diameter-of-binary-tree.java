@@ -14,20 +14,22 @@
  * }
  */
 class Solution {
-    int max = 0;
+    int longest = 0;
     public int diameterOfBinaryTree(TreeNode root) {
-        maxDepth(root);
-        return max;
+        longestPath(root);
+        return longest;
     }
     
-    public int maxDepth(TreeNode root){
+    public int longestPath(TreeNode root){
         if(root == null) return 0;
         
-        int left = maxDepth(root.left);
-        int right = maxDepth(root.right);
+        int leftheight = longestPath(root.left);
+        int rightheight = longestPath(root.right);
         
-        max = Math.max(max, right + left);
+        longest = Math.max(longest, leftheight+rightheight);
         
-        return Math.max(left, right)+1;
+        return Math.max(leftheight, rightheight)+1;
     }
+    
+    
 }
