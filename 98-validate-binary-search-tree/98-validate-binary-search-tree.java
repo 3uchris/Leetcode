@@ -14,21 +14,29 @@
  * }
  */
 class Solution {
-    long pre = Long.MIN_VALUE;
     public boolean isValidBST(TreeNode root) {
-        if (root == null) {
-            return true;
-        }
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        // 记录前一个节点
+        TreeNode pre = null;
         
-        if (!isValidBST(root.left)) {
-            return false;
+        while(stack.size() > 0 || root != null){
+            // 一直向左子树走，每一次将当前节点保存到栈中
+            if(root != null){
+                stack.add(root);
+                root = root.left;
+            }
+            // 当前节点为空，证明走到了最左边，从栈中弹出节点
+            // 开始对右子树重复上述过程
+            else{
+                TreeNode cur = stack.pop();
+                // 判断序列是否有序
+                if(pre != null && cur.val <= pre.val){
+                    return false;
+                }
+                pre = cur;
+                root = cur.right;
+            }
         }
-        
-        if (root.val <= pre) {
-            return false;
-        }
-        pre = root.val;
-        
-        return isValidBST(root.right);
+        return true;
     }
 }
