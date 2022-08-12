@@ -1,20 +1,19 @@
 class Solution {
+
     public int[] countBits(int n) {
-        int[] res = new int[n+1];
-        for(int i = 0 ; i < n+1; i++){
-            res[i] = countOnes(i);
+        int[] ans = new int[n + 1];
+
+        for (int i = 0; i <= n; i++) {
+            ans[i] = count(i);
         }
-        return res;
+        return ans;
     }
-    
-    public int countOnes(int n){
-        int one = 1;
+
+    private int count(int x) {
         int count = 0;
-        for(int i = 0; i < 32; i++){
-            if((n & one) != 0){
-                count++;
-            }
-            n >>= 1;
+        while (x != 0) {
+            x &= x - 1;
+            count++;
         }
         return count;
     }
